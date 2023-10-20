@@ -6,6 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('Users.urls')),
     path('api/habitaciones/', include('Rooms.urls')),
+    path('api/reservas/',include('Bookings.urls'))
 ]
 
 if settings.DEBUG:

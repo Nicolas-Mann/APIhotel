@@ -20,7 +20,7 @@ class Room(TimeStampedModel):
         ordering = ['name']
 
     def __str__(self):
-        return self.name
+        return 'id: ' + str(self.id) + ', ' + self.name
     
 class RoomImage(models.Model):
     room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
