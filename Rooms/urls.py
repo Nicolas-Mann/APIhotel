@@ -1,9 +1,8 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import RoomFilterView, RoomViewSet, RoomImageViewSet
+from .views import RoomFilterView, RoomViewSet
 
 router = DefaultRouter()
-router.register('imagenes-habitacion', RoomImageViewSet)
 router.register('habitaciones', RoomViewSet)
 
 urlpatterns = [

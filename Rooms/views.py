@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
-from .serializers import RoomSerializer, RoomImageSerializer, RoomfilterSerializer
-from .models import Room, RoomImage
+from .serializers import RoomSerializer, RoomfilterSerializer
+from .models import Room
 
 class RoomFilterView(APIView):
     def get(self,request):
@@ -11,7 +11,7 @@ class RoomFilterView(APIView):
         rooms = Room.objects.filter(
             max_adult_capacity__gte=num_adults, 
             max_child_capacity__gte=num_children,
-            status='Available'
+            status='Disponible'
         )
         serializer = RoomfilterSerializer(rooms, many=True, context={"request":request})
         return Response(serializer.data)
@@ -20,6 +20,3 @@ class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     
-class RoomImageViewSet(viewsets.ModelViewSet):
-    queryset = RoomImage.objects.all()
-    serializer_class = RoomImageSerializer
