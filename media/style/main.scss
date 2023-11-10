@@ -1,0 +1,87 @@
+// https://colorpalettes.io/sunrise-color-palette/ 
+$color-principal: #465961; 
+$color-secundario: #EEE5D3; 
+$color-ternario: #9BCBEB; 
+
+header { 
+  height: fit-content; 
+  margin: auto;
+  
+  background: $color-principal; 
+  color: $color-secundario;     
+
+  h1 { 
+    text-align: center; 
+    font-weight: bold; 
+  } 
+  
+}
+
+.calendario {
+    user-select: none;
+    display: grid;
+    grid-template-columns: repeat(7, 80px);
+    grid-template-rows: auto auto repeat(6, 90px);
+    text-align: center;
+
+
+    .nombre_mes {
+        height: fit-content;
+        font-size: 150%;
+        grid-column: span 7;
+        background-color: $color-secundario;
+
+        button {
+            background: none;
+            border: none;
+
+            &:hover {
+                color: white;
+                background-color: $color-ternario;
+            }
+            &:first-child { float: left; }
+            &:last-child { float: right; }
+        }
+    }
+
+    .nombre_dia {
+        height: fit-content;
+
+    }
+
+    .fecha {
+        border: 2px double black;
+        font-size: 350%;
+        color: grey;
+
+        $color-seleccionado: $color-secundario;
+        $color-hover: $color-ternario;
+        $color-seleccionado: lightblue;
+        $color-desactivado: lightgray;
+
+        &.desactivada {
+            background-color: $color-desactivado;
+        }
+
+        &:hover:not(.desactivada) {
+            background-color: $color-hover;
+        }
+
+        &.seleccionada {
+            background-color: $color-seleccionado;
+        }
+    }
+}
+
+.habitaciones {
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    .card {
+        width: 300px;
+        max-width: 350px;
+        min-width: 200px;
+    }
+}
