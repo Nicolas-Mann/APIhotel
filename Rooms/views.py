@@ -15,6 +15,17 @@ class RoomFilterView(APIView):
         )
         serializer = RoomfilterSerializer(rooms, many=True, context={"request":request})
         return Response(serializer.data)
+
+    def post(self,request):
+        num_adults = request.data.get('num_adults', 0)
+        num_children = request.data.get('num_children', 0)
+        rooms = Room.objects.filter(
+            max_adult_capacity__gte=num_adults, 
+            max_child_capacity__gte=num_children,
+            status='Disponible'
+        )
+        serializer = RoomfilterSerializer(rooms, many=True, context={"request":request})
+        return Response(serializer.data)
     
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
