@@ -23,4 +23,3 @@ class Room(TimeStampedModel):
     def __str__(self):
         return 'id: ' + str(self.id) + ', ' + self.name
     
-

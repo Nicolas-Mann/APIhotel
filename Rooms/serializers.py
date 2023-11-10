@@ -9,5 +9,5 @@ class RoomSerializer(serializers.ModelSerializer):
 class RoomfilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ['name','room_type','max_adult_capacity', 'max_child_capacity','price', 'image']
+        fields = ['id','name','room_type','max_adult_capacity', 'max_child_capacity','price', 'image']
 
