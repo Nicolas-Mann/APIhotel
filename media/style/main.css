@@ -1,0 +1,78 @@
+header {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+  background: #465961;
+  color: #EEE5D3;
+}
+header h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendario {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: grid;
+  grid-template-columns: repeat(7, 80px);
+  grid-template-rows: auto auto repeat(6, 90px);
+  text-align: center;
+}
+.calendario .nombre_mes {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 150%;
+  grid-column: span 7;
+  background-color: #EEE5D3;
+}
+.calendario .nombre_mes button {
+  background: none;
+  border: none;
+}
+.calendario .nombre_mes button:hover {
+  color: white;
+  background-color: #9BCBEB;
+}
+.calendario .nombre_mes button:first-child {
+  float: left;
+}
+.calendario .nombre_mes button:last-child {
+  float: right;
+}
+.calendario .nombre_dia {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.calendario .fecha {
+  border: 2px double black;
+  font-size: 350%;
+  color: grey;
+}
+.calendario .fecha.desactivada {
+  background-color: lightgray;
+}
+.calendario .fecha:hover:not(.desactivada) {
+  background-color: #9BCBEB;
+}
+.calendario .fecha.seleccionada {
+  background-color: lightblue;
+}
+
+.habitaciones {
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.habitaciones .card {
+  width: 300px;
+  max-width: 350px;
+  min-width: 200px;
+}/*# sourceMappingURL=main.css.map */
