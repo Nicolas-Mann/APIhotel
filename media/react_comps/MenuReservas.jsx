@@ -120,7 +120,7 @@ class MenuReservas extends React.Component {
             "num_children=" + this.state.ninos_num,
             "start_date=" + this.state.fecha_inicio,
             "end_date=" + this.state.fecha_fin
-        ]
+        ];
 
         fetch(`api/habitaciones/listar-habitaciones-filtro?${getParams.join("&")}`)
         .then(datos => datos.json())
@@ -143,12 +143,12 @@ class MenuReservas extends React.Component {
 
         // Datos del POST pero aaaa
         let datos = new Object();
-        datos.client_data = {
+        datos.client = {
             first_name: datos_personales.nombre,
             last_name: datos_personales.apellido,
-            rut: datos_personales.rut,
+            // rut: datos_personales.rut,
             email: datos_personales.email,
-            phone: datos_personales.telefono
+            phone: parseInt(datos_personales.telefono)
         }
         // Calcular dias de estadía
         const milSecPerDay = 86400000;
@@ -165,16 +165,16 @@ class MenuReservas extends React.Component {
         }
         datos.booking_room_detail = [{
             room: this.state.hab_elegida.id,
-            num_adults: this.state.hab_elegida.num_adults,
-            num_children: this.state.hab_elegida.num_children,
-            specific_price: this.state.hab_elegida.price
+            num_adults: this.state.adultos_num,
+            num_children: this.state.ninos_num,
+            specific_price: this.state.hab_elegida.price * dias
         }];
 
         console.log(datos);
         fetch("api/reservas/crear-reserva", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: datos
+            body: JSON.stringify(datos)
         })
         .then(a => a.json())
         .then(a => console.log(a));

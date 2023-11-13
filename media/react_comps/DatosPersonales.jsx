@@ -23,7 +23,7 @@ class DatosPersonales extends React.Component {
             <span>Email:</span>
             <input type="email" onChange={e => this.setState({email: e.target.value})} />
             <span>Teléfono:</span>
-            <input type="tel" onChange={e => this.setState({telefono: e.target.value})} />
+            <input type="number" onChange={e => this.setState({telefono: e.target.value})} />
 
             <div>
                 <button
