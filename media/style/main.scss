@@ -3,6 +3,10 @@ $color-principal: #465961;
 $color-secundario: #EEE5D3; 
 $color-ternario: #9BCBEB; 
 
+body {
+    user-select: none;
+}
+
 header { 
   height: fit-content; 
   margin: auto;
@@ -17,71 +21,170 @@ header {
   
 }
 
-.calendario {
-    user-select: none;
+.reservas {
     display: grid;
-    grid-template-columns: repeat(7, 80px);
-    grid-template-rows: auto auto repeat(6, 90px);
-    text-align: center;
+    grid-template-columns: auto;
+    grid-row-gap: 50px;
+    padding-bottom: 100px;
 
+    button.bonito {
+        border: none;
+        background: $color-principal;
+        color: $color-secundario;
+        font-weight: bold;
+        border-radius: 15px;
+        padding: 10px;
 
-    .nombre_mes {
+        &:hover {
+            background: $color-ternario;
+        }
+    }
+
+    .paso-requisitos {
+        display: grid;
+        grid-template-columns: 200px 300px;
+        grid-row-gap: 20px;
+        margin: auto;
+        width: fit-content;
+
+        .ancho {
+            grid-column: span 2;
+            text-align: center;
+        }
+
+        .contador-personas {
+            display: grid;
+            grid-template-columns: 100px 50px;
+            grid-column-gap: 20px;
+            grid-row-gap: 10px;
+            text-align: right;
+            font-weight: bold;
+
+            select {
+                border: none;
+                background: none;
+                font-weight: bold;
+                grid-column: 2;
+            }
+        }
+
+        .fechas {
+            display: grid;
+            grid-template-columns: 100px 150px;
+            grid-column-gap: 20px;
+            grid-row-gap: 10px;
+        }
+    }
+
+    .calendario {
+        user-select: none;
+        display: grid;
+        grid-template-columns: repeat(7, 80px);
+        grid-template-rows: 38px 24px repeat(auto-fit, 90px);
+        text-align: center;
+        background-color: white;
         height: fit-content;
-        font-size: 150%;
-        grid-column: span 7;
-        background-color: $color-secundario;
+        width: fit-content;
 
-        button {
-            background: none;
-            border: none;
 
-            &:hover {
-                color: white;
+        .nombre-mes {
+            height: fit-content;
+            font-size: 150%;
+            grid-column: span 7;
+            background-color: $color-secundario;
+
+            button {
+                background: none;
+                border: none;
+
+                &:hover {
+                    color: white;
+                    background-color: $color-ternario;
+                }
+                &:first-child { float: left; }
+                &:last-child { float: right; }
+            }
+        }
+
+        .nombre-dia {
+            height: fit-content;
+
+        }
+
+        .fecha {
+            border: 2px double black;
+            font-size: 350%;
+            color: grey;
+
+            $color-seleccionado: $color-secundario;
+            $color-hover: $color-ternario;
+            $color-seleccionado: lightblue;
+            $color-desactivado: lightgray;
+
+            &.desactivada {
+                background-color: $color-desactivado;
+            }
+
+            &:hover:not(.desactivada) {
+                background-color: $color-hover;
+            }
+
+            &.seleccionada {
+                background-color: $color-seleccionado;
+            }
+        }
+    }
+
+    .pantalla-calendario {
+        background: #000C;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        padding-top: 100px;
+    }
+
+    .habitaciones {
+        display: flex;
+        column-gap: 20px;
+        row-gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .card {
+            width: 300px;
+            max-width: 350px;
+            min-width: 200px;
+
+            &.elegida {
                 background-color: $color-ternario;
             }
-            &:first-child { float: left; }
-            &:last-child { float: right; }
         }
     }
 
-    .nombre_dia {
-        height: fit-content;
+    .datos-usuario {
+        display:grid;
+        grid-template-columns: 150px 400px;
+        grid-row-gap: 8px;
+        font-weight: bold;
+        width: fit-content;
+        margin: auto;
 
-    }
-
-    .fecha {
-        border: 2px double black;
-        font-size: 350%;
-        color: grey;
-
-        $color-seleccionado: $color-secundario;
-        $color-hover: $color-ternario;
-        $color-seleccionado: lightblue;
-        $color-desactivado: lightgray;
-
-        &.desactivada {
-            background-color: $color-desactivado;
+        input {
+            width: 100%;
+            &:not(:valid) {
+                color: red;
+            }
         }
 
-        &:hover:not(.desactivada) {
-            background-color: $color-hover;
+        div {
+            margin-top: 20px;
+            text-align: center;
+            grid-column: span 2;
         }
-
-        &.seleccionada {
-            background-color: $color-seleccionado;
-        }
-    }
-}
-
-.habitaciones {
-    display: flex;
-    column-gap: 20px;
-    row-gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    .card {
-        width: 300px;
-        max-width: 350px;
-        min-width: 200px;
     }
 }
