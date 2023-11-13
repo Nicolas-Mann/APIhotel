@@ -45,9 +45,9 @@ class CreateBookingView(APIView):
         for detail in booking_room_detail_data:
             # Obteniendo la habitacion de la base de datos
             room = Room.objects.get(id=detail['room'])
-            # Comprobando si el precio en bd es el mismo al del frontend
-            if room.price != detail['specific_price']:
-                return Response({'Error':'Los precios no coinciden'})
+            # # Comprobando si el precio en bd es el mismo al del frontend
+            # if room.price != detail['specific_price']:
+            #     return Response({'Error':'Los precios no coinciden'})
 
             # Validando capacidad
             if detail['num_adults'] > room.max_adult_capacity or detail['num_children'] > room.max_child_capacity:
@@ -65,9 +65,9 @@ class CreateBookingView(APIView):
             return Response({'Error':'Las cantidades de huespues no coinciden'},status=status.HTTP_400_BAD_REQUEST)
 
         #Comprobando el precio total calculado con el enviado desde el frontend
-        print(calculated_total_price,booking_data['total_price'])
-        if calculated_total_price != booking_data['total_price']:
-            return Response({'Error':'El precio total no coincide con el calculo del servidor'}, status=status.HTTP_400_BAD_REQUEST)
+        # print(calculated_total_price,booking_data['total_price'])
+        # if calculated_total_price != booking_data['total_price']:
+        #     return Response({'Error':'El precio total no coincide con el calculo del servidor'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Serializa y valida los datos de la reserva.
         booking_serializer = BookinSerializer(data=booking_data)
