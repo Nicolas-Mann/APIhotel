@@ -20,10 +20,12 @@ class ContadorPersonas extends React.Component {
         while (i_ninos <= this.props.ninos_max)
             vals_ninos.push(i_ninos++);
 
-        return <div className="contador_personas">
+        return <div className="contador-personas">
+            <span>Adultos:</span>
             <select name="adultos_num" onChange={this.actualizarNums}>
                 { vals_adultos.map(num => <option key={num}>{num}</option>)}
             </select>
+            <span>Niños:</span>
             <select name="ninos_num" onChange={this.actualizarNums}>
                 { vals_ninos.map(num => <option key={num}>{num}</option>)}
             </select>
@@ -38,7 +40,7 @@ class ContadorPersonas extends React.Component {
 }
 
 ContadorPersonas.defaultProps = {
-    adultos_max: 2,
+    adultos_max: 4,
     adultos_min: 1,
     ninos_max: 2,
     ninos_min: 0,

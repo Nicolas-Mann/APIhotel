@@ -22,8 +22,8 @@ class RoomFilterView(APIView):
         if start_date and end_date:
             # Validar y convertir las fechas al formato correcto si es necesario
             try:
-                start_date = datetime.strptime(start_date, "%Y-%m-%dT%H:%M:%SZ")
-                end_date = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%SZ")
+                start_date = datetime.strptime(start_date, "%Y-%m-%d")
+                end_date = datetime.strptime(end_date, "%Y-%m-%d")
             except ValueError:
                 # Manejar errores de formato de fecha aquí
                 return Response({"error": "Formato de fecha inválido."}, status=status.HTTP_400_BAD_REQUEST)
