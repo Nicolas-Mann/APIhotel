@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db import transaction
@@ -7,6 +7,8 @@ from Rooms.models import Room
 from .serializers import BookinSerializer, BookingRoomDetailSerializer
 from Clients.models import Client
 from Clients.serializers import ClientSerializer
+from django.utils import timezone
+from rest_framework.decorators import action
 
 class CreateBookingView(APIView):
     
@@ -93,3 +95,37 @@ class CreateBookingView(APIView):
             'booking': booking_serializer.data,
             'booking_room_detail': details_serializer.data
         }, status=status.HTTP_201_CREATED)
+
+
+
+class BookingViewSet(viewsets.ModelViewSet):
+    serializer_class = BookinSerializer
+
+    def get_queryset(self):
+        # Obtener el parámetro 'limit' de la solicitud
+        limit = self.request.query_params.get('limit', None)
+
+        # Verificar si se proporciona un límite y es un número válido
+        if limit and limit.isdigit():
+            # Aplicar el límite al queryset y ordenarlo por start_date
+            queryset = Booking.objects.filter(start_date__gte=timezone.now()).order_by('start_date')[:int(limit)]
+        else:
+            # Devolver el queryset sin límite, ordenado por start_date
+            queryset = Booking.objects.filter(start_date__gte=timezone.now()).order_by('start_date')
+
+        return queryset
+
+    @action(detail=False, methods=['get'], url_path='en-curso')
+    def en_curso(self, request):
+        # Obtener las reservas en curso
+        now = timezone.now()
+        reservations_en_curso = Booking.objects.filter(
+           
+            status='En curso'
+        )
+        
+        print("Fecha actual:", now)
+        print("Reservas en curso:", reservations_en_curso)  # Agrega este mensaje de registro
+        
+        serializer = BookinSerializer(reservations_en_curso, many=True)
+        return Response(serializer.data)
